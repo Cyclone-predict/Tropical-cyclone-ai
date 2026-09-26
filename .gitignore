@@ -1,0 +1,17 @@
+# Environment variables
+.env
+backend/.env
+
+# Python virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Uploaded test images
+backend/uploads/*
+
+# IDE files
+.vscode/
