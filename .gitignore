@@ -1,5 +1,6 @@
 # Environment variables
 .env
+.env.*
 backend/.env
 
 # Python virtual environment
@@ -8,10 +9,26 @@ venv/
 
 # Python cache
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
 
-# Uploaded test images
+# Uploaded and generated data
 backend/uploads/*
+*.png
+*.jpg
+*.jpeg
+*.pt
+*.pth
+*.onnx
+*.h5
+*.hdf5
+*.pkl
+*.joblib
+*.bin
 
 # IDE files
 .vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
