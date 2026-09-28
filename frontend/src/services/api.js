@@ -1,15 +1,15 @@
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 /**
- * Predict cyclone from satellite image
- * POST /predict
+ * Analyze a TCIR HDF5 upload
+ * POST /analyze
  */
 export const predictSatelliteImage = async (file) => {
   const formData = new FormData();
-  formData.append('file', file);
+  formData.append('image', file);
 
   try {
-    const response = await fetch(`${API_URL}/predict`, {
+    const response = await fetch(`${API_URL}/analyze`, {
       method: 'POST',
       body: formData,
     });

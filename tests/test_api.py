@@ -30,6 +30,13 @@ def test_health_endpoint():
     assert response.json()['service'] == 'CycloneAI Backend'
 
 
+def test_cyclone_list_endpoint_returns_json_list():
+    response = client.get('/cyclones')
+
+    assert response.status_code == 200
+    assert isinstance(response.json(), list)
+
+
 def test_analyze_requires_tcir_file():
     response = client.post('/analyze')
     assert response.status_code == 400

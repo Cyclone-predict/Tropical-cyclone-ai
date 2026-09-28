@@ -11,7 +11,7 @@ import Evolution from './pages/Evolution';
 function App() {
   const [currentPage, setCurrentPage] = useState('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isDemoMode, setIsDemoMode] = useState(true);
+  const [isDemoMode, setIsDemoMode] = useState(false);
   
   // Theme Management
   const [theme, setTheme] = useState(() => {

@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend.database.connection import Base, engine
+from backend.routes.cyclone import router as cyclone_router
 from backend.routes.prediction import router as prediction_router
 
 Base.metadata.create_all(bind=engine)
@@ -29,6 +30,7 @@ app.add_middleware(
 )
 
 app.include_router(prediction_router)
+app.include_router(cyclone_router)
 
 
 @app.get("/health")

@@ -12,13 +12,15 @@ This backend is a FastAPI service for the SIH 2026 prototype. It validates TCIR-
 1. Activate the project environment.
 2. Install dependencies:
 
-   python -m pip install -r backend/requirements.txt
+  python -m pip install -r backend/requirements.txt
   python -m pip install -r ai/requirements.txt
 
-3. Create the local structural prototype files (from the project root):
+3. Configure `DATABASE_URL` (for a local SQLite prototype, set `sqlite:///./cycloneai.db` in the environment).
 
-    python ai/dataset/generate_validation_asset.py
-    python ai/training/train_prediction.py
+4. Create the local structural prototype files (from the project root):
+
+  python ai/dataset/generate_validation_asset.py
+  python ai/training/train_prediction.py
 
 The generated HDF5 asset and model checkpoint are local-only and remain ignored by Git.
 
@@ -63,9 +65,9 @@ Example with curl:
 The route also exposes /predict as a compatibility alias.
 
 ## Response contract
-The backend returns the inference JSON fields: `pattern`, `predicted_vmax`, and the existing pipeline-validation `note`.
+The backend returns Member 1's inference JSON fields: `cyclone_detected`, `pattern`, `predicted_vmax`, `confidence`, `trend`, and the pipeline-validation `note`.
 
-The inference uses the first matrix frame, transposes it to `(4, 201, 201)`, and scales values by `1/255`, matching the existing `TCIRDataset` preprocessing. The model only estimates intensity; it does not produce cyclone detection, confidence, or temporal trend, so those values are not fabricated.
+The inference uses the first matrix frame, transposes it to `(4, 201, 201)`, and scales values by `1/255`, matching the existing `TCIRDataset` preprocessing. `pattern` is derived from the intensity estimate. Member 1's current code also returns prototype placeholder detection, confidence, and trend values; these are not scientifically validated model results.
 
 ## Error responses
 Errors are returned as JSON with a top-level success flag.
