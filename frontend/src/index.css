@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import 'leaflet/dist/leaflet.css';
+
+:root {
+  /* Light Theme (Default) */
+  --bg-canvas: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-surface-hover: #F1F5F9;
+  --border-color: #E2E8F0;
+  --border-color-light: #CBD5E1;
+  
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --text-disabled: #94A3B8;
+  
+  --bg-disabled: #E2E8F0;
+  
+  /* Accents */
+  --accent-purple: #A855F7;
+  --accent-purple-hover: #9333EA;
+  --accent-purple-light: rgba(168, 85, 247, 0.08);
+  --accent-purple-glow: rgba(168, 85, 247, 0.2);
+  
+  /* Status Colors */
+  --status-danger: #EF4444;
+  --status-warning: #F59E0B;
+  --status-success: #10B981;
+  --status-info: #3B82F6;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-glow: 0 0 15px var(--accent-purple-glow);
+  
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  
+  --sidebar-width: 260px;
+  --header-height: 70px;
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+}
+
+.dark {
+  /* Dark Theme */
+  --bg-canvas: #09090B;
+  --bg-surface: #18181B;
+  --bg-surface-hover: #27272A;
+  --border-color: #27272A;
+  --border-color-light: #3F3F46;
+  
+  --text-primary: #FAFAFA;
+  --text-secondary: #A1A1AA;
+  --text-muted: #71717A;
+  --text-disabled: #52525B;
+  
+  --bg-disabled: #3F3F46;
+  
+  /* Accents */
+  --accent-purple: #A855F7;
+  --accent-purple-hover: #9333EA;
+  --accent-purple-light: rgba(168, 85, 247, 0.12);
+  --accent-purple-glow: rgba(168, 85, 247, 0.25);
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px var(--accent-purple-glow);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  
+  /* Subtle grid background for futuristic feel */
+  background-image: 
+    linear-gradient(to right, var(--border-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
+  background-size: 100px 100px;
+  background-position: center top;
+}
+
+/* Make grid incredibly subtle */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-color: var(--bg-canvas);
+  opacity: 0.96; /* 4% visibility for the grid */
+  z-index: -1;
+  pointer-events: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: var(--accent-purple);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+a:hover {
+  color: var(--accent-purple-hover);
+}
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+/* Base Panel - Futuristic */
+.panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle corner highlights for futuristic tech feel */
+.panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+}
+.panel:hover::before {
+  background-color: var(--accent-purple);
+}
+.panel:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-color-light);
+}
+
+/* Glass panel */
+.glass-panel {
+  background: rgba(var(--bg-surface), 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border-color-light);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* Utility Classes */
+.text-purple { color: var(--accent-purple); }
+.text-danger { color: var(--status-danger); }
+.text-warning { color: var(--status-warning); }
+.text-success { color: var(--status-success); }
+.text-muted { color: var(--text-muted); }
+.text-secondary { color: var(--text-secondary); }
+.text-primary { color: var(--text-primary); }
+
+.bg-purple { background-color: var(--accent-purple); }
+.bg-purple-light { background-color: var(--accent-purple-light); }
+.bg-danger { background-color: var(--status-danger); }
+.bg-warning { background-color: var(--status-warning); }
+.bg-success { background-color: var(--status-success); }
+.bg-surface { background-color: var(--bg-surface); }
+.bg-canvas { background-color: var(--bg-canvas); }
+
+.border-subtle { border-color: var(--border-color); }
+.font-mono { font-family: var(--font-mono); }
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+
+@keyframes pulse-dot {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+.status-dot-animated {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--status-success);
+  animation: pulse-dot 2s infinite;
+}
+
+/* Leaflet Map Overrides - VERY IMPORTANT TO FIX BLANK MAP */
+.leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  background: var(--bg-canvas) !important;
+  font-family: var(--font-sans);
+  z-index: 1;
+}
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
+  border-radius: 8px;
+}
+.leaflet-popup-content {
+  margin: 10px 14px;
+  line-height: 1.5;
+}
+/* Ensure tiles don't blind user in dark mode if normal tiles are used */
+.dark .leaflet-tile-pane {
+  filter: brightness(0.7) invert(1) contrast(1.2) hue-rotate(180deg) saturate(0.3);
+}
+
+/* Empty State / Telemetry text */
+.telemetry-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
