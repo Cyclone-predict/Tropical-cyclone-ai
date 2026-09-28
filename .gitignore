@@ -6,6 +6,8 @@ backend/.env
 # Python virtual environment
 .venv/
 venv/
+env/
+ENV/
 
 # Python cache
 __pycache__/
@@ -22,13 +24,21 @@ backend/uploads/*
 *.onnx
 *.h5
 *.hdf5
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+models/*.ckpt
+outputs/
+runs/
 *.pkl
 *.joblib
 *.bin
 
 # IDE files
 .vscode/
-
-# OS files
+Thumbs.db
+# OS
 .DS_Store
 Thumbs.db
+>>>>>>> origin/Samiya
